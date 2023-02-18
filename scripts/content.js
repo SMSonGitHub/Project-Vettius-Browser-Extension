@@ -1,4 +1,32 @@
-const insert = (content) => {}
+const insert = (content) => {
+  const elements = document.getElementsByClassName('droid');
+
+if (elements.length === 0) {
+  return;
+}
+
+const element = elements[0];
+
+const splitContent = content.split('\n');
+
+const pToRemove = element.childNodes[0];
+pToRemove.remove();
+
+splitContent.forEach((content) => {
+  const p = document.createElement('p');
+
+  if (content === '') {
+    const br = document.createElement('br');
+    p.appendChild(br);
+  } else {
+    p.textContent = content;
+  }
+
+  // Insert into HTML one at a time
+  element.appendChild(p);
+});
+return true;
+}
 
 chrome.runtime.onMessage.addListener(
   // This is the message listener
