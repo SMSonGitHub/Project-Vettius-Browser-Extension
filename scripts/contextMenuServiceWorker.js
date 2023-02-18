@@ -57,8 +57,9 @@ const generateCompletionAction = async (info) => {
 
     const { selectionText } = info;
     const basePromptPrefix = `
-      Write me a detailed table of contents for a blog post with the title below.
-      
+      In the style of Vettius Valens, Write me a blog post with the title below. 
+      Make sure it is well written and in depth.
+
       Title:
       `;
 
@@ -66,20 +67,21 @@ const generateCompletionAction = async (info) => {
         `${basePromptPrefix}${selectionText}`
       );
       
-      const secondPrompt = `
-        Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
+      // const secondPrompt = `
+      //   Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
         
-        Title: ${selectionText}
+      //   Title: ${selectionText}
         
-        Table of Contents: ${baseCompletion.text}
+      //   Table of Contents: ${baseCompletion.text}
         
-        Blog Post:
-		  `;
+      //   Blog Post:
+		  // `;
       
-      const secondPromptCompletion = await generate(secondPrompt);
+      // const secondPromptCompletion = await generate(secondPrompt);
       
       // Send the output when we're all done
-      sendMessage(secondPromptCompletion.text);
+      console.log(baseCompletion.text)	
+      sendMessage(baseCompletion.text);
   } catch (error) {
     console.log(error);
 
@@ -87,6 +89,7 @@ const generateCompletionAction = async (info) => {
     sendMessage(error.toString());
   }
 };
+
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
       id: 'context-run',
