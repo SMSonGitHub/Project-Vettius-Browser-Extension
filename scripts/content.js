@@ -54,10 +54,3 @@ chrome.runtime.onMessage.addListener(
     }
   }
 );
-
-checkForKey().then((response) => {
-  if (response) {
-    document.getElementById('key_needed').style.display = 'none';
-    document.getElementById('key_entered').style.display = 'block';
-  }
-});
