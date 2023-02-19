@@ -27,9 +27,6 @@ const sendMessage = (content) => {
 
 const generate = async (prompt) => {
   // Get your API key from storage
-  try{
-
-  
   const key = await getKey();
   const url = 'https://api.openai.com/v1/completions';
 	
@@ -50,32 +47,43 @@ const generate = async (prompt) => {
 	
   const completion = await completionResponse.json();
   return completion.choices.pop();
-} catch(error){
-  console.log(error);
-}
 }
 
 const generateCompletionAction = async (info) => {
 	try {
+    // Send mesage with generating text (this will be like a loading indicator)
     sendMessage('generating...');
 
     const { selectionText } = info;
-    const basePromptPrefix =
-      `
-      Write me a detailed blog post in the style of Vettius Valens with the title below. 
-      Make the post in depth.
-
+    const basePromptPrefix = `
+      Write me a detailed table of contents for a blog post with the title below.
+      
       Title:
       `;
 
-		// Add this to call GPT-3
-    const baseCompletion = await generate(`${basePromptPrefix}${selectionText}`);
-
-    // Let's see what we get!
-    console.log(baseCompletion.text);
-    sendMessage(baseCompletion.text);
+      const baseCompletion = await generate(
+        `${basePromptPrefix}${selectionText}`
+      );
+      
+      const secondPrompt = `
+        Take the table of contents and title of the blog post below and generate a blog post written in thwe style of Paul Graham. Make it feel like a story. Don't just list the points. Go deep into each one. Explain why.
+        
+        Title: ${selectionText}
+        
+        Table of Contents: ${baseCompletion.text}
+        
+        Blog Post:
+		  `;
+      
+      const secondPromptCompletion = await generate(secondPrompt);
+      
+      // Send the output when we're all done
+      sendMessage(secondPromptCompletion.text);
   } catch (error) {
     console.log(error);
+
+    // Add this here as well to see if we run into any errors!
+    sendMessage(error.toString());
   }
 };
 
