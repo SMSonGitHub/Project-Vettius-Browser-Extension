@@ -1,14 +1,3 @@
-const getKey = () => {
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get(['openai-key'], (result) => {
-      if (result['openai-key']) {
-        const decodedKey = atob(result['openai-key']);
-        resolve(decodedKey);
-      }
-    });
-  });
-};
-
 const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
@@ -22,6 +11,17 @@ const sendMessage = (content) => {
         }
       }
     );
+  });
+};
+
+const getKey = () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['openai-key'], (result) => {
+      if (result['openai-key']) {
+        const decodedKey = atob(result['openai-key']);
+        resolve(decodedKey);
+      }
+    });
   });
 };
 
@@ -45,7 +45,6 @@ const generate = async (prompt) => {
     }),
   });
 	
-  // Select the top choice and send back
   const completion = await completionResponse.json();
   return completion.choices.pop();
 }
