@@ -1,3 +1,14 @@
+const getKey = () => {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(['openai-key'], (result) => {
+      if (result['openai-key']) {
+        const decodedKey = atob(result['openai-key']);
+        resolve(decodedKey);
+      }
+    });
+  });
+};
+
 const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
@@ -14,19 +25,11 @@ const sendMessage = (content) => {
   });
 };
 
-const getKey = () => {
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get(['openai-key'], (result) => {
-      if (result['openai-key']) {
-        const decodedKey = atob(result['openai-key']);
-        resolve(decodedKey);
-      }
-    });
-  });
-};
-
 const generate = async (prompt) => {
   // Get your API key from storage
+  try{
+
+  
   const key = await getKey();
   const url = 'https://api.openai.com/v1/completions';
 	
@@ -47,6 +50,9 @@ const generate = async (prompt) => {
 	
   const completion = await completionResponse.json();
   return completion.choices.pop();
+} catch(error){
+  console.log(error);
+}
 }
 
 const generateCompletionAction = async (info) => {
