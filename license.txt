@@ -1,0 +1,19 @@
+This is the license for the app while it's in Closed Alpha. 
+
+The purpose of this license is to protect the app 
+while in the most sensitive stages of development.
+
+You, the user, have permission to "test" the app.
+
+"Testing" the app means the following:
+
+1. You can use the app to generate content.
+2. You may use content generated with the app for material or financial gain, 
+but only with written consent from Sabien Ruffin, 
+hereafter referred to as the "developer".
+3. You may share content made with the app with other people, 
+with written consent from the developer.
+4. You are prohibited from copying or modifying the source code.
+
+
+Copyright Sabien Ruffin ©2023. All rights reserved.

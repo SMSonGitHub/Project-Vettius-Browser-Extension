@@ -14,12 +14,13 @@ if (elements.length === 0) {
 }
 
 const element = elements[0];
-
-const splitContent = content.split('\n');
+// Grab the first p tag so we can replace it with our injection
 
 const pToRemove = element.childNodes[0];
 pToRemove.remove();
-
+// Split content by \n
+const splitContent = content.split('\n');
+// Wrap in p tags
 splitContent.forEach((content) => {
   const p = document.createElement('p');
 

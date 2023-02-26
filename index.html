@@ -3,6 +3,16 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+        <h2>Temperature</h2>
+        <div class="heatContainer">
+            <input type="range" min="0" max="200" value="50" class-"slider" id="tempRange">
+            <p>Value(x10): <span id="tempNum"></span></p>
+        </div>
+        <h2>Token Count</h2>
+        <div class="wordCountContainer">
+            <input type="range" min="256" max="1024" value="256" class-"slider" id="wordCount">
+            <p>Value(x10): <span id="wordCt"></span></p>
+        </div>
         <div id="key_needed">
             <p>To get started, add your OpenAI API Key!</p>
             <input id="key_input" />

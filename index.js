@@ -25,6 +25,7 @@ const saveKey = () => {
       document.getElementById('key_entered').style.display = 'block';
     });
   }
+  
 };
 
 const changeKey = () => {
@@ -32,10 +33,26 @@ const changeKey = () => {
   document.getElementById('key_entered').style.display = 'none';
 };
 
+
+var heatSlider = document.getElementById("tempRange");
+var output = document.getElementById("tempNum");
+output.innerHTML = heatSlider.value;
+
+//updates the value on screen as the slider is moved
+heatSlider.oninput = function() {
+  output.innerHTML= this.value;
+}
+
+var wordSlider = document.getElementById("wordCount");
+var countOutput = document.getElementById("wordCt");
+countOutput.innerHTML = wordSlider.value;
+
+wordSlider.oninput = function() {
+  countOutput.innerHTML= this.value;
+}
+
 document.getElementById('save_key_button').addEventListener('click', saveKey);
-document
-  .getElementById('change_key_button')
-  .addEventListener('click', changeKey);
+document.getElementById('change_key_button').addEventListener('click', changeKey);
 
   checkForKey().then((response) => {
     if (response) {
