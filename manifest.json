@@ -14,7 +14,8 @@
     "default_title": "Create Post"
   },
   "background": {
-    "service_worker": "scripts/contextMenuServiceWorker.js"
+    "service_worker": "scripts/contextMenuServiceWorker.js",
+    "type": "module"
   },
   "permissions": ["contextMenus", "tabs", "storage"],
   "host_permissions": ["https://*/*"],

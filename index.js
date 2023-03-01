@@ -1,3 +1,6 @@
+import { Buffer } from "./node_modules/buffer";
+// import './scripts/contextMenuServiceWorker.js';
+
 const checkForKey = () => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(['openai-key'], (result) => {
@@ -7,7 +10,8 @@ const checkForKey = () => {
 };
 
 const encode = (input) => {
-  return btoa(input);
+  return Buffer.from(input);
+  //return btoa(input); normally return btoa but im tryna update it to buffer
 };
 
 const saveKey = () => {

@@ -1,17 +1,18 @@
-const getKey = () => {
+import { Buffer } from "../node_modules/buffer";
+
+export const getKey = () => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(['openai-key'], (result) => {
       if (result['openai-key']) {
-        const decodedKey = atob(result['openai-key']);
+        const decodedKey = Buffer.toString(result['openai-key']);
         resolve(decodedKey);
       }
     });
-  });
+  });   
+
 };
 
-
-
-const sendMessage = (content) => {
+export const sendMessage = (content) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
 
@@ -27,7 +28,7 @@ const sendMessage = (content) => {
   });
 };
 
-const generate = async (prompt) => {
+export const generate = async (prompt) => {
   // Get your API key from storage
   const key = await getKey();
   const url = 'https://api.openai.com/v1/completions';
@@ -53,7 +54,7 @@ const generate = async (prompt) => {
   return completion.choices.pop();
 }
 
-const generateCompletionAction = async (info) => {
+export const generateCompletionAction = async (info) => {
   try {
     console.log('Generating...');
     
@@ -83,3 +84,4 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener(generateCompletionAction);
+
