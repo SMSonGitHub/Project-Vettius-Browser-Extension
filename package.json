@@ -1,6 +1,10 @@
 {
     "name": "project-vettius",
+    "main": "contextMenuServiceWorker.js",
     "version": "0.1.2",
     "license": "SEE LICENSE IN LICENSE.TXT",
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "buffer": "^6.0.3"
+    }
 }

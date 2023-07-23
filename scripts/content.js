@@ -13,6 +13,8 @@ if (elements.length === 0) {
   return;
 }
 
+//consider using an 'embed' feature to allow for internet wide functionality, and attraction to your website -arch
+
 const element = elements[0];
 // Grab the first p tag so we can replace it with our injection
 

@@ -1,3 +1,6 @@
+//import buffer from 'buffer';
+// import { Buffer } from './node_modules/buffer';
+
 const checkForKey = () => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(['openai-key'], (result) => {
@@ -6,9 +9,17 @@ const checkForKey = () => {
   });
 };
 
+// //return a buffer of the encoded string
+// const encode = (input) => {
+
+//   return Buffer.toString(input, "base64");
+
+// };
+
 const encode = (input) => {
   return btoa(input);
 };
+
 
 const saveKey = () => {
   const input = document.getElementById('key_input');
@@ -60,3 +71,6 @@ document.getElementById('change_key_button').addEventListener('click', changeKey
       document.getElementById('key_entered').style.display = 'block';
     }
   });
+
+
+  export {checkForKey, saveKey, changeKey}
