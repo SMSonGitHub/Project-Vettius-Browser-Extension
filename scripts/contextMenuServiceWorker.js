@@ -37,6 +37,7 @@ const getKey = () => {
 };
 
 const sendMessage = (content) => {
+  
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const activeTab = tabs[0].id;
 
@@ -109,7 +110,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.contextMenus.onClicked.addListener(generateCompletionAction);
 
-export {
-  getKey,
-  generate
- }
+// export {
+//   getKey,
+//   generate
+//  }

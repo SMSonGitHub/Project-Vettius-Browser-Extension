@@ -73,4 +73,4 @@ document.getElementById('change_key_button').addEventListener('click', changeKey
   });
 
 
-  export {checkForKey, saveKey, changeKey}
+  // export {checkForKey, saveKey, changeKey}
